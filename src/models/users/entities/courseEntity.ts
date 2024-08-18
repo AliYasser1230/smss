@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  BaseEntity,
   ManyToOne,
 } from 'typeorm';
 import { Teacher } from './teacherEntity';
@@ -17,12 +16,12 @@ export class Course {
   @Column({ type: 'varchar' })
   courseDescription: String;
 
-  @Column({ type: 'time' })
+  @Column({ type: 'varchar' })
   duration: string;
 
   @ManyToOne(() => Teacher, (teacher) => teacher.courses)
-  teacher: Teacher;
+  teachers: Teacher;
 
-  @Column({ type: 'number' })
+  @Column({ type: 'integer' })
   credits: number;
 }
