@@ -1,12 +1,10 @@
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
   OneToMany,
-  BaseEntity,
-  ManyToMany,
   OneToOne,
   JoinColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Course } from './courseEntity';
 import { Timetable } from './timeTableEntity';
@@ -14,7 +12,6 @@ import { User } from './userEntity';
 
 @Entity('teachers')
 export class Teacher extends User {
-  
   @PrimaryGeneratedColumn()
   teacherId: number;
 
@@ -33,7 +30,7 @@ export class Teacher extends User {
   @OneToMany(() => Course, (course) => course.teachers)
   courses: Course[];
 
-  @OneToOne(() => Timetable, (timetable) => timetable.teachers)
+  @OneToOne(() => Timetable, (timetable) => timetable.teacher)
   @JoinColumn()
   timetable: Timetable;
 }

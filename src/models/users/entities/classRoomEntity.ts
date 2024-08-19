@@ -1,14 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  BaseEntity,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
-import { Teacher } from './teacherEntity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Student } from './studentEntity';
 
 @Entity('classrooms')
@@ -25,6 +15,6 @@ export class ClassRoom {
   @Column({ type: 'varchar' })
   location: string;
 
-  @OneToMany(() => Student, (student) => student.classRooms)
-  students: Student[];
+  @OneToMany(() => Student, (student) => student.classRoom)
+  students: Student[]; // One Classroom has many Students
 }

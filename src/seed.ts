@@ -7,6 +7,7 @@ import { Course } from './models/users/entities/courseEntity';
 import { Student } from './models/users/entities/studentEntity';
 import { Grade } from './models/users/entities/gradeEntity';
 import { Timetable } from './models/users/entities/timeTableEntity';
+import { ClassRoom } from './models/users/entities/classRoomEntity';
 
 @Injectable()
 export class DatabaseSeederService implements OnModuleInit {
@@ -14,10 +15,13 @@ export class DatabaseSeederService implements OnModuleInit {
     @InjectRepository(Admin) private adminRepository: Repository<Admin>,
     @InjectRepository(Teacher) private teacherRepository: Repository<Teacher>,
     @InjectRepository(Course) private courseRepository: Repository<Course>,
-      @InjectRepository(Student) private studentRepository: Repository<Student>,
-    @InjectRepository(Grade) private gradeRepository:Repository<Grade>,
-   @InjectRepository(Timetable) private timeTableRepository:Repository<Timetable>
-  ) { }
+    @InjectRepository(Student) private studentRepository: Repository<Student>,
+    @InjectRepository(Grade) private gradeRepository: Repository<Grade>,
+    @InjectRepository(Timetable)
+    private timeTableRepository: Repository<Timetable>,
+    @InjectRepository(ClassRoom)
+    private classRoomRepository: Repository<ClassRoom>,
+  ) {}
 
   async onModuleInit() {
     await this.seed();
@@ -28,12 +32,25 @@ export class DatabaseSeederService implements OnModuleInit {
     const admin = this.adminRepository.create({
       name: 'John Doe',
     });
-
     await this.adminRepository.save(admin);
+
+    // Seed Grade (e.g., Grade 1)
+    const grade = this.gradeRepository.create({
+      gradeLevel: 'Grade 1',
+    });
+    await this.gradeRepository.save(grade);
+
+    // Seed Classroom
+    const classRoom = this.classRoomRepository.create({
+      roomNumber: 101,
+      capacity: 30,
+      location: 'Building A',
+    });
+    await this.classRoomRepository.save(classRoom);
 
     // Seed Teacher
     const teacher = this.teacherRepository.create({
-      name: 'Jane Smith', // Assuming 'name' is defined in the User entity which Teacher extends
+      name: 'Jane Smith',
       qualifications: 'MSc in Computer Science',
       specialization: 'Programming',
       hireDate: new Date(),
@@ -41,15 +58,35 @@ export class DatabaseSeederService implements OnModuleInit {
     });
     await this.teacherRepository.save(teacher);
 
-    // Seed Course
+    // Seed Course linked to Teacher
     const course = this.courseRepository.create({
       courseDescription: 'Introduction to Programming',
       duration: '2 hours',
       credits: 3,
-      teachers: teacher, // Assuming a ManyToOne relationship
+      teachers: teacher, // Establishes relationship between course and teacher
     });
     await this.courseRepository.save(course);
 
-    console.log('Database seeding completed');
+    // Seed Timetable linked to Teacher
+    const timetable = this.timeTableRepository.create({
+      dayOfWeek: new Date(),
+      startTime: '08:00',
+      endTime: '10:00',
+      teacher: teacher, // Establishes relationship between timetable and teacher
+    });
+    await this.timeTableRepository.save(timetable);
+
+    // Seed Student linked to Grade and Classroom
+    const student = this.studentRepository.create({
+      name: 'Alice Johnson',
+      dateOfBirth: new Date('2010-05-15'),
+      address: '123 Main St',
+      enrollmentDate: new Date(),
+      guardianName: 'Sarah Johnson',
+      guardianContact: '555-1234',
+      grade: grade, // Establishes relationship with Grade
+      classRoom: classRoom, // Establishes relationship with Classroom
+    });
+    await this.studentRepository.save(student);
   }
 }
