@@ -30,14 +30,18 @@ export class DatabaseSeederService implements OnModuleInit {
   async seed() {
     // Seed Admin
     const admin = this.adminRepository.create({
-      name: 'John Doe',
+        name: 'John Doe',
+        email: 'jhon@',
+        password:'jhon@'
     });
+      
     await this.adminRepository.save(admin);
 
     // Seed Grade (e.g., Grade 1)
     const grade = this.gradeRepository.create({
       gradeLevel: 'Grade 1',
     });
+      
     await this.gradeRepository.save(grade);
 
     // Seed Classroom
@@ -50,7 +54,9 @@ export class DatabaseSeederService implements OnModuleInit {
 
     // Seed Teacher
     const teacher = this.teacherRepository.create({
-      name: 'Jane Smith',
+        name: 'Jane Smith',
+         email: 'jhon@',
+        password:'jhon@',
       qualifications: 'MSc in Computer Science',
       specialization: 'Programming',
       hireDate: new Date(),
@@ -78,7 +84,9 @@ export class DatabaseSeederService implements OnModuleInit {
 
     // Seed Student linked to Grade and Classroom
     const student = this.studentRepository.create({
-      name: 'Alice Johnson',
+        name: 'Alice Johnson',
+         email: 'jhon@',
+        password:'jhon@',
       dateOfBirth: new Date('2010-05-15'),
       address: '123 Main St',
       enrollmentDate: new Date(),

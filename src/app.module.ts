@@ -21,17 +21,27 @@ import { Course } from './models/users/entities/courseEntity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User,Admin,ClassRoom,Grade,Student,Teacher,Timetable,Course],
+      entities: [
+        User,
+        Admin,
+        ClassRoom,
+        Grade,
+        Student,
+        Teacher,
+        Timetable,
+        Course,
+      ],
       migrations: ['dist/migrations/*.js'],
       synchronize: true,
     }),
     SeederModule,
   ],
 })
+  
 export class AppModule implements OnModuleInit {
   constructor(private readonly seederService: DatabaseSeederService) {}
 
   async onModuleInit() {
-    await this.seederService.seed(); // Seeds data on backend startup
+    await this.seederService.seed(); 
   }
 }
