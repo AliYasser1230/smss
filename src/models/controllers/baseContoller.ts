@@ -10,7 +10,7 @@ import {
 import { DeepPartial, FindOptionsWhere, Repository } from 'typeorm';
 import { ApiTags } from '@nestjs/swagger';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { BaseEntity } from './users/entities/baseEntity';
+import { BaseEntity } from '../users/entities/baseEntity';
 import { Equal } from 'typeorm';
 
 @ApiTags('base')
@@ -21,6 +21,7 @@ export abstract class BaseCrudController<T extends BaseEntity> {
     const entity = this.repository.create(createDto);
     return this.repository.save(entity);
   }
+
   @Get()
   async findAll(): Promise<T[]> {
     return this.repository.find();

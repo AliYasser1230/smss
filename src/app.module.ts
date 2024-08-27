@@ -11,6 +11,7 @@ import { Student } from './models/users/entities/studentEntity';
 import { Teacher } from './models/users/entities/teacherEntity';
 import { Timetable } from './models/users/entities/timeTableEntity';
 import { Course } from './models/users/entities/courseEntity';
+import { StudentController } from './models/controllers/studentController';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -31,17 +32,29 @@ import { Course } from './models/users/entities/courseEntity';
         Timetable,
         Course,
       ],
+
       migrations: ['dist/migrations/*.js'],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([
+      User,
+      Admin,
+      ClassRoom,
+      Grade,
+      Student,
+      Teacher,
+      Timetable,
+      Course,
+    ]),
     SeederModule,
   ],
+  controllers: [StudentController],
+  providers: [DatabaseSeederService],
 })
-  
 export class AppModule implements OnModuleInit {
   constructor(private readonly seederService: DatabaseSeederService) {}
 
   async onModuleInit() {
-    await this.seederService.seed(); 
+    await this.seederService.seed();
   }
 }
