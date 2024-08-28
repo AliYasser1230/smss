@@ -26,5 +26,8 @@ export class StudentController extends BaseCrudController<Student> {
   async create(@Body() createDto: StudentDto): Promise<Student> {
     const student = this.studentRepository.create(createDto);
     return this.studentRepository.save(student);
-  }
+    }
+    
+
+    
 }

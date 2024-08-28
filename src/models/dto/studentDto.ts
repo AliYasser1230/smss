@@ -1,44 +1,44 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsInt, IsOptional, IsDate } from 'class-validator';
+import { IsString, IsInt, IsDate } from 'class-validator';
 
 export class StudentDto {
   @ApiProperty()
   @IsString()
-  readonly name: string;
+  name: string;
 
   @ApiProperty()
   @IsString()
-  readonly email: string;
+  email: string;
 
   @ApiProperty()
   @IsString()
-  readonly password: string;
+  password: string;
 
   @ApiProperty()
   @IsDate()
-  readonly dateOfBirth: Date;
+  dateOfBirth: Date;
 
   @ApiProperty()
   @IsString()
-  readonly address: string;
+  address: string;
 
   @ApiProperty()
   @IsDate()
-  readonly enrollmentDate: Date;
+  enrollmentDate: Date;
 
   @ApiProperty()
   @IsString()
-  readonly guardianName: string;
+  guardianName: string;
 
   @ApiProperty()
   @IsString()
-  readonly guardianContact: string;
+  guardianContact: string;
 
   @ApiProperty()
   @IsInt()
-  readonly classRoomId: number;
+  classRoomId: number;
 
   @ApiProperty()
   @IsInt()
-  readonly gradeId: number;
+  gradeId: number;
 }

@@ -1,10 +1,13 @@
-import { Entity, Column, ManyToOne } from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { ClassRoom } from './classRoomEntity';
 import { Grade } from './gradeEntity';
 import { User } from './userEntity';
 
 @Entity('students')
 export class Student extends User {
+  @PrimaryGeneratedColumn()
+  studentId: number;
+  
   @Column({ type: 'date' })
   dateOfBirth: Date;
 
