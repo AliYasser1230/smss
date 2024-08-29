@@ -12,6 +12,7 @@ import { Teacher } from './models/users/entities/teacherEntity';
 import { Timetable } from './models/users/entities/timeTableEntity';
 import { Course } from './models/users/entities/courseEntity';
 import { StudentController } from './models/controllers/studentController';
+import { TeacherController } from './models/controllers/teacherController';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -48,7 +49,7 @@ import { StudentController } from './models/controllers/studentController';
     ]),
     SeederModule,
   ],
-  controllers: [StudentController],
+  controllers: [StudentController,TeacherController],
   providers: [DatabaseSeederService],
 })
 export class AppModule implements OnModuleInit {

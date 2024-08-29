@@ -15,18 +15,7 @@ export class StudentController extends BaseCrudController<Student> {
   ) {
     super(studentRepository);
   }
-  @Post()
-  @ApiOperation({ summary: 'Create a new student' })
-  @ApiResponse({
-    status: 201,
-    description: 'The student has been successfully created.',
-    type: StudentDto,
-  })
-  @ApiResponse({ status: 400, description: 'Bad request.' })
-  async create(@Body() createDto: StudentDto): Promise<Student> {
-    const student = this.studentRepository.create(createDto);
-    return this.studentRepository.save(student);
-    }
+ 
     
 
     

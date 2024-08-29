@@ -1,19 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsInt, IsDate } from 'class-validator';
-
-export class StudentDto {
-  @ApiProperty()
-  @IsString()
-  name: string;
-
-  @ApiProperty()
-  @IsString()
-  email: string;
-
-  @ApiProperty()
-  @IsString()
-  password: string;
-
+import { UserDto } from './userDto';
+export class StudentDto extends UserDto{
+ 
   @ApiProperty()
   @IsDate()
   dateOfBirth: Date;
